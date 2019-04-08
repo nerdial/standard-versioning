@@ -2,15 +2,14 @@
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-/**
- * Author: Chidume Nnamdi <kurtwanger40@gmail.com>
- */
+
 class GeneratorCommand extends SymfonyCommand
 {
     
-    protected static $defaultName = 'generate';
+    protected static $defaultName = 'commit';
 
     public function __construct()
     {
@@ -24,12 +23,24 @@ class GeneratorCommand extends SymfonyCommand
 
         // the full command description shown when running the command with
         // the "--help" option
-        ->setHelp('This command allows you to create a changelog file...');
+        ->setHelp('This command allows you to create a changelog file...')
+        ->setDefinition(
+            new InputDefinition([
+                new InputOption('message', 'm', InputOption::VALUE_REQUIRED),
+                new InputArgument('type', InputArgument::REQUIRED, 'ranger'),
+            ])
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-       
+        $type = $input->getArgument('type');
+
+        if(!in_array($type, ['major', 'minor', 'patch'])){
+            throw new \Exception('Type argument must be one of these values : major, minor, patch');
+        }
+
+        $commitMessage = $input->getOption('message');
 
         $listOfTags = \array_filter(\explode(\PHP_EOL, \shell_exec("git for-each-ref refs/tags --sort=-taggerdate --format='%(refname)' --count=2")));
         $secondTag = \explode('/', \array_pop($listOfTags) )[2];
@@ -48,7 +59,7 @@ class GeneratorCommand extends SymfonyCommand
         array_push($sections, $incrementedVersion);
         $newVersion = \implode('.', $sections);
 
-        shell_exec("git commit --allow-empty -m  'added new tag  "  . $newVersion. " '   ");
+        shell_exec("git commit --allow-empty -m  '  " . $type. ' : ' .  $commitMessage. " '   ");
 
         shell_exec("git tag $newVersion -a -m $newVersion");
 
