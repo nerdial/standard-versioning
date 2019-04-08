@@ -1,0 +1,12 @@
+{
+    "name": "nerdial/standard-changelog",
+    "type": "library",
+    "require": {
+        "symfony/console": "^4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nerdial\\Standards\\": "src/"
+        }
+    }
+}
