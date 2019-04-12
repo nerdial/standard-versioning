@@ -1,12 +1,12 @@
 <?php namespace Nerdial\Standards\Console;
-use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class GeneratorCommand extends SymfonyCommand
+class CommitCommand extends Command
 {
     
     protected static $defaultName = 'commit';
@@ -43,6 +43,11 @@ class GeneratorCommand extends SymfonyCommand
         $commitMessage = $input->getOption('message');
 
         $listOfTags = \array_filter(\explode(\PHP_EOL, \shell_exec("git for-each-ref refs/tags --sort=-taggerdate --format='%(refname)' --count=2")));
+
+        if(count($listOfTags) < 1) {
+            throw new \Exception('You must have at least 2 tags to proceed.');
+        }
+
         $secondTag = \explode('/', \array_pop($listOfTags) )[2];
         $firstTag = \explode('/' , \array_pop($listOfTags) )[2];
 
