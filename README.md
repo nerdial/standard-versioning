@@ -1,1 +1,2 @@
-# standard-changelog
+# standard-versioning
+
