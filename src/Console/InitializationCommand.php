@@ -10,7 +10,7 @@ class InitializationCommand extends Command
 {
     
     protected static $defaultName = 'init';
-
+    protected $defaultVersion = "0.1.0";
     public function __construct()
     {
         parent::__construct();
@@ -23,18 +23,31 @@ class InitializationCommand extends Command
 
         // the full command description shown when running the command with
         // the "--help" option
-        ->setHelp('This command inits the current directory and outputs a config file called : ');
-        // ->setDefinition(
-        //     new InputDefinition([
-        //         new InputOption('message', 'm', InputOption::VALUE_REQUIRED),
-        //         new InputArgument('type', InputArgument::REQUIRED, 'ranger'),
-        //     ])
-        // );
+        ->setHelp('This command generates or overrides the changelog based on all commits history')
+        ->setDefinition(
+            new InputDefinition([
+                new InputOption('start-from', InputOption::VALUE_REQUIRED),
+                
+            ])
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-    
+        $defaultVersionOption = 'start-from';
+
+        if($preferedVersion = $input->getOption($defaultVersionOption)){
+            $this->modifyDefaultVersion($preferedVersion);
+        }
+
+        // create first tag
+
+        shell_exec("git tag v{$this->defaultVersion} -a -m {$this->defaultVersion}");
 
     }
+
+    protected function modifyDefaultVersion(string $defaultVersion)
+    {
+        $this->defaultVersion = $defaultVersion;
+    } 
 }
