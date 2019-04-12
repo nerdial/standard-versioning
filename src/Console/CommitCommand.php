@@ -20,7 +20,7 @@ class CommitCommand extends Command
     {
         $this
         // the short description shown while running "php bin/console list"
-        ->setDescription('Add new CHANGELOG.md file')
+        ->setDescription('')
 
         // the full command description shown when running the command with
         // the "--help" option

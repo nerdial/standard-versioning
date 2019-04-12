@@ -17,7 +17,7 @@ class GenerateChangelogCommand extends Command
     {
         $this
         // the short description shown while running "php bin/console list"
-        ->setDescription('Add new CHANGELOG.md file')
+        ->setDescription('')
 
         // the full command description shown when running the command with
         // the "--help" option
@@ -28,11 +28,11 @@ class GenerateChangelogCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
-        $listOfTags = \array_filter(\explode(\PHP_EOL, \shell_exec("git for-each-ref refs/tags --sort=-taggerdate --format='%(refname)' --count=2")));
+        // $listOfTags = \array_filter(\explode(\PHP_EOL, \shell_exec("git for-each-ref refs/tags --sort=-taggerdate --format='%(refname)' --count=2")));
 
-        if (count($listOfTags) < 1) {
-            throw new \Exception('You must have at least 2 tags to proceed.');
-        }
+        // if (count($listOfTags) < 1) {
+        //     throw new \Exception('You must have at least 2 tags to proceed.');
+        // }
 
 
         // $secondTag = \explode('/', \array_pop($listOfTags))[2];
