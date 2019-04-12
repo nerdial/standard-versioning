@@ -1,14 +1,14 @@
 <?php namespace Nerdial\Standards\Console;
+
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class InitializationCommand extends Command
 {
-    
+
     protected static $defaultName = 'init';
     protected $defaultVersion = "0.1.0";
     public function __construct()
@@ -23,20 +23,20 @@ class InitializationCommand extends Command
 
         // the full command description shown when running the command with
         // the "--help" option
-        ->setHelp('This command generates or overrides the changelog based on all commits history')
-        ->setDefinition(
-            new InputDefinition([
-                new InputOption('start-from', InputOption::VALUE_REQUIRED),
-                
-            ])
-        );
+            ->setHelp('This command generates or overrides the changelog based on all commits history')
+            ->setDefinition(
+                new InputDefinition([
+                    new InputOption('start-from', InputOption::VALUE_REQUIRED),
+
+                ])
+            );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $defaultVersionOption = 'start-from';
 
-        if($preferedVersion = $input->getOption($defaultVersionOption)){
+        if ($preferedVersion = $input->getOption($defaultVersionOption)) {
             $this->modifyDefaultVersion($preferedVersion);
         }
 
@@ -49,5 +49,5 @@ class InitializationCommand extends Command
     protected function modifyDefaultVersion(string $defaultVersion)
     {
         $this->defaultVersion = $defaultVersion;
-    } 
+    }
 }
