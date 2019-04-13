@@ -1,5 +1,5 @@
 {
-    "name": "nerdial/standard-changelog",
+    "name": "nerdial/standard-versioning",
     "type": "library",
     "require": {
         "symfony/console": "^4.2"
