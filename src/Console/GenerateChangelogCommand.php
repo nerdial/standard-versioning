@@ -36,16 +36,6 @@ class GenerateChangelogCommand extends Command
         }
         ChangelogGenerator::generateChanglogFile();
 
-        //$secondTag = \explode('/', \array_pop($listOfTags))[2];
-        //$firstTag = \explode('/', \array_pop($listOfTags))[2];
-
-
         // shell_exec("git commit --allow-empty -m  '  " . $type . ' : ' . $commitMessage . " '   ");
-
-       
-        
-        
-
-        //\file_put_contents('CHANGELOG.md', $latestCommits);
     }
 }
