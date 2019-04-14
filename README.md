@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/nerdial/standard-versioning.svg?branch=master)](https://travis-ci.org/nerdial/standard-versioning)
 
 # Available Commands
 
@@ -15,5 +16,5 @@ $ moon init
 > This command will create a new tag in your git repository
 
 ```sh
-$ moon commit major|minor|patch -m "Add new version"
+$ moon tag major|minor|patch -m "Add new version"
 ```
