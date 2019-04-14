@@ -7,10 +7,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CommitCommand extends Command
+class TagCommand extends Command
 {
 
-    protected static $defaultName = 'commit';
+    protected static $defaultName = 'generate:tag';
 
     public function __construct()
     {
@@ -38,14 +38,14 @@ class CommitCommand extends Command
 
         $type = $input->getArgument('type');
 
-        if (!in_array($type, ['major', 'minor', 'patch'])) {
+        if (!\in_array($type, ['major', 'minor', 'patch'])) {
             throw new \Exception('Type argument must be one of these values : major, minor, patch');
         }
 
         $nextVersion = $this->getNextVersion($type);
 
         $commitMessage = $input->getOption('message');
-        shell_exec("git tag $nextVersion -a -m $nextVersion");
+        \shell_exec("git tag $nextVersion -a -m $nextVersion");
         //shell_exec("git commit --allow-empty -m  ' ({$type}): {$commitMessage}");
     }
 
@@ -55,7 +55,7 @@ class CommitCommand extends Command
         $unprocessedTag = \explode('/', $lastTag);
         $latestVersion = \array_pop($unprocessedTag);
 
-        return explode('.', str_replace('v', '', $latestVersion));
+        return \explode('.', \str_replace('v', '', $latestVersion));
     }
 
     protected function getNextVersion($type)
