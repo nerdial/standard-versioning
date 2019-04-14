@@ -9,6 +9,6 @@
             "Nerdial\\Standards\\": "src/"
         }
     },
-    "bin": ["bin/moon"]
+    "bin": ["moon"]
 
 }
