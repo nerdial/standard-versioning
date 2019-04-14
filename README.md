@@ -1,4 +1,3 @@
-# standard-versioning
 
 # Available Commands
 
@@ -8,7 +7,7 @@
 > This command will create a default tag for initiation
 
 ```sh
-$ php index.php init
+$ moon init
 ```
 
 # Create new tag version
@@ -16,5 +15,5 @@ $ php index.php init
 > This command will create a new tag in your git repository
 
 ```sh
-$ php index.php commit major|minor|patch -m "Add new version"
+$ moon commit major|minor|patch -m "Add new version"
 ```
