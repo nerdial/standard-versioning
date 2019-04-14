@@ -8,5 +8,7 @@
         "psr-4": {
             "Nerdial\\Standards\\": "src/"
         }
-    }
+    },
+    "bin": ["bin/moon"]
+
 }
