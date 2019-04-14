@@ -1,3 +1,3 @@
 language: php
 install: composer install
-script: phpunit --bootstrap vendor/autoload.php tests/SimpleTests.php
+script: phpunit --bootstrap vendor/autoload.php tests/SimpleTest.php
