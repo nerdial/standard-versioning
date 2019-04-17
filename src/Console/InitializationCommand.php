@@ -19,11 +19,11 @@ class InitializationCommand extends Command
     {
         $this
         // the short description shown while running "php bin/console list"
-        ->setDescription('Add new CHANGELOG.md file')
+        ->setDescription('Add a config file for the pacakge')
 
         // the full command description shown when running the command with
         // the "--help" option
-            ->setHelp('This command generates or overrides the changelog based on all commits history')
+            ->setHelp('This command initiate the project.')
             ->setDefinition(
                 new InputDefinition([
                     new InputOption('start-from', InputOption::VALUE_REQUIRED),
