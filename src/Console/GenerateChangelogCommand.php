@@ -8,7 +8,7 @@ use Nerdial\Standards\Generator\ChangelogGenerator;
 class GenerateChangelogCommand extends Command
 {
 
-    protected static $defaultName = 'generate:changelog';
+    protected static $defaultName = 'changelog';
 
     public function __construct()
     {
@@ -18,7 +18,7 @@ class GenerateChangelogCommand extends Command
     {
         $this
         // the short description shown while running "php bin/console list"
-        ->setDescription('')
+        ->setDescription('Generate a CHANGELOG.md file based on all tags and commits')
 
         // the full command description shown when running the command with
         // the "--help" option

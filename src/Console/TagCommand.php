@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class TagCommand extends Command
 {
 
-    protected static $defaultName = 'generate:tag';
+    protected static $defaultName = 'tag';
 
     public function __construct()
     {

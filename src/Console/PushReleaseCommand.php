@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class PushReleaseCommand extends Command
 {
 
-    protected static $defaultName = 'push:release';
+    protected static $defaultName = 'release';
     protected $releaseApi = 'https://api.github.com/repos/nerdial/testing-tags/releases';
 
     public function __construct()
@@ -21,7 +21,7 @@ class PushReleaseCommand extends Command
     {
         $this
         // the short description shown while running "php bin/console list"
-        ->setDescription('')
+        ->setDescription('Create a new github release, find newest tag with commit messages and push it to github repository')
 
         // the full command description shown when running the command with
         // the "--help" option
