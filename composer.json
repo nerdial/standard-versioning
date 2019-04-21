@@ -2,7 +2,8 @@
     "name": "nerdial/standard-versioning",
     "type": "library",
     "require": {
-        "symfony/console": "^4.2"
+        "symfony/console": "^4.2",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "autoload": {
         "psr-4": {
