@@ -20,11 +20,11 @@ class TagCommand extends Command
     {
         $this
         // the short description shown while running "php bin/console list"
-        ->setDescription('')
+        ->setDescription('Create a new tag for a git project, you could pass major, minor or patch version')
 
         // the full command description shown when running the command with
         // the "--help" option
-            ->setHelp('This command allows you to create a changelog file...')
+            ->setHelp('This command allows you to create a new tag')
             ->setDefinition(
                 new InputDefinition([
                     new InputOption('message', 'm', InputOption::VALUE_REQUIRED, 'commit message for new tag', 'New tag added to vsc'),
