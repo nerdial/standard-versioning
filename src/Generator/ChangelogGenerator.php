@@ -5,13 +5,18 @@ class ChangelogGenerator
 
     public static function generateChanglogFile()
     {
-        $allTags = self::getAllTags();
-        self::analyzeLogs($allTags);
+        $output = self::getOutput();
+        \file_put_contents('CHANGELOG.md', $output);
     }
 
-    protected static function analyzeLogs($tags)
+    public function getOutput()
     {
+        $allTags = self::getAllTags();
+        return self::generateCreatedOutput($allTags);
+    }
 
+    protected static function generateCreatedOutput($tags)
+    {
         $changelogData = '';
         foreach ($tags as $tag) {
             $nextItem = next($tags);
@@ -20,9 +25,9 @@ class ChangelogGenerator
             $commits = self::getCommitsBetween($currentTag, $nextTag);
             $changelogData .= self::generateChangelog($tag, $commits);
         }
-
-        \file_put_contents('CHANGELOG.md', $changelogData);
+        return $changelogData;
     }
+
 
     protected static function getAllTags()
     {
