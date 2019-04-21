@@ -6,7 +6,7 @@
 ```sh
 $ composer global require nerdial/standard-versioning
 ```
-## Or in root of a project
+## Or in a root of a project
 
 ```sh
 $ composer require nerdial/standard-versioning
