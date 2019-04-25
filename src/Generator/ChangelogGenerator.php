@@ -35,7 +35,7 @@ class ChangelogGenerator
         array_pop($allTags);
 
         return \array_map(function ($value) {
-            $value = explode(' ', $value);
+            $value = \explode(' ', $value);
             return ['tag' => $value[0], 'date' => $value[1]];
         }, $allTags);
     }
