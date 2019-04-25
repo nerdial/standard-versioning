@@ -28,7 +28,6 @@ class ChangelogGenerator
         return $changelogData;
     }
 
-
     protected static function getAllTags()
     {
         $extractedTags = \shell_exec("git tag --sort=-creatordate --format '%(tag) %(taggerdate:format-local:%Y-%m-%d)' ");
@@ -43,12 +42,19 @@ class ChangelogGenerator
 
     protected static function generateChangelog($tag, $commits)
     {
-        return "## [{$tag['tag']}](compare/) ({$tag['date']})
-            {$commits} \n";
+
+        $commits = \array_filter(explode(PHP_EOL, $commits));
+        $commitString = "";
+        if (\is_array($commits)) {
+            foreach ($commits as $commit) {
+                $commitString .= "* " . $commit . PHP_EOL;
+            }
+        }
+        return "## {$tag['tag']} ({$tag['date']}) " . PHP_EOL . "{$commitString} ";
     }
 
     protected static function getCommitsBetween($nextTag, $previousTag)
     {
-        return \shell_exec("git log --pretty=oneline  $nextTag...$previousTag");
+        return \shell_exec("git log --pretty=oneline --pretty=format:'%s' $nextTag...$previousTag");
     }
 }
