@@ -37,11 +37,10 @@ class PushReleaseCommand extends Command
     {
         $client = new \GuzzleHttp\Client();
         $tokenOption = $input->getOption('token');
-        if (isset($_ENV['GITHUB_TOKEN_API']) and !empty($tokenOption)) {
-            $apiToken = $_ENV['GITHUB_TOKEN_API'];
-        } else if (isset($tokenOption) and !empty($tokenOption)) {
-            $apiToken = $tokenOption;
-        } else {
+
+        $apiToken = $_ENV['GITHUB_TOKEN_API'] ?? $tokenOption ?? null;
+
+        if (!isset($apiToken) || empty($apiToken) ) {
             throw new \Exception('You need to either define an environment variable called GITHUB_TOKEN_API or pass option -t, if you want to use this api');
         }
 
