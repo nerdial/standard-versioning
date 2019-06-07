@@ -4,6 +4,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Nerdial\Standards\Generator\ChangelogGenerator;
+use Nerdial\Standards\Helper\GitHelper;
 
 class GenerateChangelogCommand extends Command
 {
@@ -17,17 +18,22 @@ class GenerateChangelogCommand extends Command
     protected function configure()
     {
         $this
-        // the short description shown while running "php bin/console list"
-        ->setDescription('Generate a CHANGELOG.md file based on all tags and commits')
+            // the short description shown while running "php bin/console list"
+            ->setDescription('Generate a CHANGELOG.md file based on all tags and commits')
 
-        // the full command description shown when running the command with
-        // the "--help" option
+            // the full command description shown when running the command with
+            // the "--help" option
             ->setHelp('This command generates or overrides the changelog based on all commits history');
-
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+
+        if (!GitHelper::gitDirectoryExists()) {
+            $output->writeln('<error>  Make sure current direcory is a git repository by calling <question> git init </question> </error>');
+            return 1; // non-zero code - fails
+        }
+
 
         $listOfTags = \array_filter(\explode(\PHP_EOL, \shell_exec("git for-each-ref refs/tags --sort=-taggerdate --format='%(refname)' --count=2")));
 

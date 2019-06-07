@@ -6,6 +6,7 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Nerdial\Standards\Helper\GitHelper;
 
 class TagCommand extends Command
 {
@@ -35,6 +36,12 @@ class TagCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+
+        if (!GitHelper::gitDirectoryExists()) {
+            $output->writeln('<error>  Make sure current direcory is a git repository by calling <question> git init </question> </error>');
+            return 1; // non-zero code - fails
+        }
+
 
         $type = $input->getArgument('type');
 
