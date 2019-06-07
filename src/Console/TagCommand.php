@@ -46,6 +46,9 @@ class TagCommand extends Command
 
         $commitMessage = $input->getOption('message');
         \shell_exec("git tag $nextVersion -a -m $nextVersion");
+
+        $output->writeln("<info> New tag created {$nextVersion} </info>");
+
         //shell_exec("git commit --allow-empty -m  ' ({$type}): {$commitMessage}");
     }
 
