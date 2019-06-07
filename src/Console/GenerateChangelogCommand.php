@@ -36,6 +36,8 @@ class GenerateChangelogCommand extends Command
         }
         ChangelogGenerator::generateChanglogFile();
 
+        $output->writeln('<info> Changelog file created </info>');
+
         // shell_exec("git commit --allow-empty -m  '  " . $type . ' : ' . $commitMessage . " '   ");
     }
 }
