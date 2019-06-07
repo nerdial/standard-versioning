@@ -44,14 +44,16 @@ class InitializationCommand extends Command
             return;
         }
 
-        $preferedTagFormat = $input->getOption($tagFormatOption)?? "";
+        $preferedTagFormat = $input->getOption($tagFormatOption);
 
-        $this->modifyDefaultTagFormat($preferedTagFormat);
-       
+        if(isset($preferedTagFormat)){
+            $this->modifyDefaultTagFormat($preferedTagFormat);
+        }
+      
         $output->writeln('<info> Creating moon.yaml file ... </info>');
         
 
-        YamlHelper::createConfigFile($preferedTagFormat);
+        YamlHelper::createConfigFile($this->defaultTagFormat);
 
         $output->writeln('<info> A file called moon.yaml created in the root directory </info>');
 
@@ -78,7 +80,7 @@ class InitializationCommand extends Command
         $this->defaultVersion = $defaultVersion;
     }
 
-    protected function modifyDefaultTagFormat(string $preferedTagFormat = "")
+    protected function modifyDefaultTagFormat(string $preferedTagFormat)
     {
         $this->defaultTagFormat = $preferedTagFormat;
     }
