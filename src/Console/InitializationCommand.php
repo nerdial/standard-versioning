@@ -6,6 +6,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Nerdial\Standards\Helper\YamlHelper;
+use Nerdial\Standards\Helper\GitHelper;
 
 class InitializationCommand extends Command
 {
@@ -39,19 +40,24 @@ class InitializationCommand extends Command
         $defaultVersionOption = 'start-from';
         $tagFormatOption = 'tag-format';
 
+        if (!GitHelper::gitDirectoryExists()) {
+            $output->writeln('<error>  Make sure current direcory is a git repository by calling <question> git init </question> </error>');
+            return 1; // non-zero code - fails
+        }
+
         if (YamlHelper::fileExists()) {
             $output->writeln('<info>It seems there is already a file called moon.yaml </info>');
-            return;
+           return 0;  // zero code - exits successfully
         }
 
         $preferedTagFormat = $input->getOption($tagFormatOption);
 
-        if(isset($preferedTagFormat)){
+        if (isset($preferedTagFormat)) {
             $this->modifyDefaultTagFormat($preferedTagFormat);
         }
-      
+
         $output->writeln('<info> Creating moon.yaml file ... </info>');
-        
+
 
         YamlHelper::createConfigFile($this->defaultTagFormat);
 
@@ -63,7 +69,7 @@ class InitializationCommand extends Command
         }
 
         // create first tag
-        
+
         \shell_exec('git add moon.yaml && git commit -m "Create a moon.yaml file config" ');
 
         $output->writeln('<info> Added moon.yaml to git </info>');
@@ -72,7 +78,6 @@ class InitializationCommand extends Command
         \shell_exec("git tag {$this->defaultTagFormat}{$this->defaultVersion} -a -m {$this->defaultVersion}");
 
         $output->writeln('<info> Created the first tag for versioning </info>');
-
     }
 
     protected function modifyDefaultVersion(string $defaultVersion)
