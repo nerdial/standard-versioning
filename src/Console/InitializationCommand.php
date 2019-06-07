@@ -41,8 +41,7 @@ class InitializationCommand extends Command
         $tagFormatOption = 'tag-format';
 
         if (!GitHelper::gitDirectoryExists()) {
-            $output->writeln('<error>  Make sure current direcory is a git repository by calling <question> git init </question> </error>');
-            return 1; // non-zero code - fails
+            throw new \Exception('Make sure current direcory is a git repository by calling  "git init" ');
         }
 
         if (YamlHelper::fileExists()) {

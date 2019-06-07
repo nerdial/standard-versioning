@@ -21,11 +21,11 @@ class PushReleaseCommand extends Command
     protected function configure()
     {
         $this
-        // the short description shown while running "php bin/console list"
-        ->setDescription('Create a new github release, find newest tag with commit messages and push it to github repository')
+            // the short description shown while running "php bin/console list"
+            ->setDescription('Create a new github release, find newest tag with commit messages and push it to github repository')
 
-        // the full command description shown when running the command with
-        // the "--help" option
+            // the full command description shown when running the command with
+            // the "--help" option
             ->setHelp('')
             ->setDefinition(
                 new InputDefinition([
@@ -38,8 +38,7 @@ class PushReleaseCommand extends Command
     {
 
         if (!GitHelper::gitDirectoryExists()) {
-            $output->writeln('<error>  Make sure current direcory is a git repository by calling <question> git init </question> </error>');
-            return 1; // non-zero code - fails
+            throw new \Exception('Make sure current direcory is a git repository by calling  "git init" ');
         }
 
 
@@ -48,7 +47,7 @@ class PushReleaseCommand extends Command
 
         $apiToken = $_ENV['GITHUB_TOKEN_API'] ?? $tokenOption ?? null;
 
-        if (!isset($apiToken) || empty($apiToken) ) {
+        if (!isset($apiToken) || empty($apiToken)) {
             throw new \Exception('You need to either define an environment variable called GITHUB_TOKEN_API or pass option -t, if you want to use this api');
         }
 
@@ -68,5 +67,4 @@ class PushReleaseCommand extends Command
             ],
         ]);
     }
-
 }

@@ -20,11 +20,11 @@ class TagCommand extends Command
     protected function configure()
     {
         $this
-        // the short description shown while running "php bin/console list"
-        ->setDescription('Create a new tag for a git project, you could pass major, minor or patch version')
+            // the short description shown while running "php bin/console list"
+            ->setDescription('Create a new tag for a git project, you could pass major, minor or patch version')
 
-        // the full command description shown when running the command with
-        // the "--help" option
+            // the full command description shown when running the command with
+            // the "--help" option
             ->setHelp('This command allows you to create a new tag')
             ->setDefinition(
                 new InputDefinition([
@@ -38,8 +38,7 @@ class TagCommand extends Command
     {
 
         if (!GitHelper::gitDirectoryExists()) {
-            $output->writeln('<error>  Make sure current direcory is a git repository by calling <question> git init </question> </error>');
-            return 1; // non-zero code - fails
+            throw new \Exception('Make sure current direcory is a git repository by calling  "git init" ');
         }
 
 
@@ -73,13 +72,12 @@ class TagCommand extends Command
         [$major, $minor, $patch] = $this->getLatestVersion();
 
         if ($type == 'major') {
-            $nextVersion = ((int) $major + 1) . '.0.0';
+            $nextVersion = ((int)$major + 1) . '.0.0';
         } else if ($type == 'minor') {
-            $nextVersion = $major . '.' . ((int) $minor + 1) . '.0';
+            $nextVersion = $major . '.' . ((int)$minor + 1) . '.0';
         } else {
-            $nextVersion = $major . '.' . $minor . '.' . ((int) $patch + 1);
+            $nextVersion = $major . '.' . $minor . '.' . ((int)$patch + 1);
         }
         return "v$nextVersion";
     }
-
 }
