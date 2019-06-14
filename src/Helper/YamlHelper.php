@@ -20,4 +20,12 @@ class YamlHelper
     {
         return \file_exists(static::CONFIG_NAME) ? true : false;
     }
+
+    public static function getKey($key){
+       $file = Yaml::parseFile(static::CONFIG_NAME);
+       if(!isset($file[$key])){
+            throw new \Exception('There is not any key called ' . $key. ' in yaml file');
+       }
+       return $file[$key];
+    }
 }

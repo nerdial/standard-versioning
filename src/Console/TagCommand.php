@@ -7,6 +7,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Nerdial\Standards\Helper\GitHelper;
+use Nerdial\Standards\Helper\VersionHelper;
+use Nerdial\Standards\Helper\YamlHelper;
 
 class TagCommand extends Command
 {
@@ -47,8 +49,9 @@ class TagCommand extends Command
         if (!\in_array($type, ['major', 'minor', 'patch'])) {
             throw new \Exception('Type argument must be one of these values : major, minor, patch');
         }
-
-        $nextVersion = $this->getNextVersion($type);
+        $prefix = YamlHelper::getKey('tag_format');
+        
+        $nextVersion = VersionHelper::getNextVersion($type, $prefix);
 
         $commitMessage = $input->getOption('message');
         \shell_exec("git tag $nextVersion -a -m $nextVersion");
@@ -58,26 +61,5 @@ class TagCommand extends Command
         //shell_exec("git commit --allow-empty -m  ' ({$type}): {$commitMessage}");
     }
 
-    protected function getLatestVersion()
-    {
-        $lastTag = \shell_exec("git for-each-ref refs/tags --sort=-taggerdate --format='%(refname)' --count=1");
-        $unprocessedTag = \explode('/', $lastTag);
-        $latestVersion = \array_pop($unprocessedTag);
-
-        return \explode('.', \str_replace('v', '', $latestVersion));
-    }
-
-    protected function getNextVersion($type)
-    {
-        [$major, $minor, $patch] = $this->getLatestVersion();
-
-        if ($type == 'major') {
-            $nextVersion = ((int)$major + 1) . '.0.0';
-        } else if ($type == 'minor') {
-            $nextVersion = $major . '.' . ((int)$minor + 1) . '.0';
-        } else {
-            $nextVersion = $major . '.' . $minor . '.' . ((int)$patch + 1);
-        }
-        return "v$nextVersion";
-    }
+   
 }
