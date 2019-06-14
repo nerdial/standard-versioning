@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Nerdial\Standards\Helper\YamlHelper;
 use Nerdial\Standards\Helper\GitHelper;
+use Nerdial\Standards\Helper\VersionHelper;
 
 class InitializationCommand extends Command
 {
@@ -64,7 +65,7 @@ class InitializationCommand extends Command
 
 
         if ($preferedVersion = $input->getOption($defaultVersionOption)) {
-            $this->modifyDefaultVersion($preferedVersion);
+            $this->modifyDefaultVersion($preferedVersion, 'patch', $this->defaultTagFormat);
         }
 
         // create first tag
@@ -79,8 +80,9 @@ class InitializationCommand extends Command
         $output->writeln('<info> Created the first tag for versioning </info>');
     }
 
-    protected function modifyDefaultVersion(string $defaultVersion)
+    protected function modifyDefaultVersion(string $defaultVersion, $type, $prefix)
     {
+        $nextVersion = VersionHelper::getNextVersion($type, $prefix);
         $this->defaultVersion = $defaultVersion;
     }
 

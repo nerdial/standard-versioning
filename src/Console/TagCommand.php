@@ -31,7 +31,7 @@ class TagCommand extends Command
             ->setDefinition(
                 new InputDefinition([
                     new InputOption('message', 'm', InputOption::VALUE_REQUIRED, 'commit message for new tag', 'New tag added to vsc'),
-                    new InputArgument('type', InputArgument::REQUIRED, 'ranger'),
+                    new InputArgument('type', InputArgument::OPTIONAL, 'Type of version', 'patch'),
                 ])
             );
     }
@@ -45,9 +45,9 @@ class TagCommand extends Command
 
 
         $type = $input->getArgument('type');
-
+       
         if (!\in_array($type, ['major', 'minor', 'patch'])) {
-            throw new \Exception('Type argument must be one of these values : major, minor, patch');
+            throw new \Exception('Type argument must be one of these values : major, minor, patch default is patch');
         }
         $prefix = YamlHelper::getKey('tag_format');
         

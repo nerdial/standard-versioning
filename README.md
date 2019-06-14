@@ -25,7 +25,7 @@ $ ./vendor/bin/moon
 > This command creates a config file called moon.yaml, then creates the first tag and commit to the git 
 
 ```sh
-$ moon init --current-version 0.1.2 --tag-format 
+$ moon init --current-version 0.1.2 --tag-format "v"
 ```
 Options
 
