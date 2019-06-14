@@ -22,7 +22,7 @@ class InitializationCommand extends Command
     {
         $this
             // the short description shown while running "php bin/console list"
-            ->setDescription('Add a config file for the pacakge')
+            ->setDescription('Adds a config file for the pacakge')
 
             // the full command description shown when running the command with
             // the "--help" option

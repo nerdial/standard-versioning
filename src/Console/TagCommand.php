@@ -21,7 +21,7 @@ class TagCommand extends Command
     {
         $this
             // the short description shown while running "php bin/console list"
-            ->setDescription('Create a new tag for a git project, you could pass major, minor or patch version')
+            ->setDescription('Creates a new tag for a git project, you could pass major, minor or patch parameter')
 
             // the full command description shown when running the command with
             // the "--help" option

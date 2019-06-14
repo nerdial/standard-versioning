@@ -22,7 +22,7 @@ class PushReleaseCommand extends Command
     {
         $this
             // the short description shown while running "php bin/console list"
-            ->setDescription('Create a new github release, find newest tag with commit messages and push it to github repository')
+            ->setDescription('Creates a new github release, finds newest tag with commit messages and pushes it to github repository')
 
             // the full command description shown when running the command with
             // the "--help" option
