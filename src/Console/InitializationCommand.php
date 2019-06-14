@@ -60,7 +60,7 @@ class InitializationCommand extends Command
 
         YamlHelper::createConfigFile($this->defaultTagFormat);
 
-        $output->writeln('<info> A file called moon.yaml created in the root directory </info>');
+        $output->writeln('<info> A file called moon.yaml was created in the root directory </info>');
 
 
         if ($preferedVersion = $input->getOption($defaultVersionOption)) {

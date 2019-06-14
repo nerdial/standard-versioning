@@ -22,11 +22,16 @@ $ ./vendor/bin/moon
 
 ### Initiate versioning process
 
-> This command will create a default tag for initiation
+> This command creates a config file called moon.yaml, then creates the first tag and commit to the git 
 
 ```sh
 $ moon init
 ```
+Options
+Name | Shortcut | Value | Default| Description
+--- | --- | --- | --- | ---
+--start-from | -s | 0.0.1 | 0.1.0 | if you have already a git repository with some tags you should tell the package which version you are in.
+--tag-format | -f | v , V  or whatever prefix \n you prefer | v | tag format tells that what prefix should be added to the begining of tag name. by default it uses semvar structure like v1.0.0
 
 ### Create new tag version
 
