@@ -29,7 +29,7 @@ class InitializationCommand extends Command
             ->setHelp('This command initiate the project.')
             ->setDefinition(
                 new InputDefinition([
-                    new InputOption('start-from', 's', InputOption::VALUE_REQUIRED),
+                    new InputOption('current-version', 'c', InputOption::VALUE_REQUIRED),
                     new InputOption('tag-format', 'f', InputOption::VALUE_REQUIRED) // "v" , "V" ,""
                 ])
             );
@@ -37,7 +37,7 @@ class InitializationCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $defaultVersionOption = 'start-from';
+        $defaultVersionOption = 'current-version';
         $tagFormatOption = 'tag-format';
 
         if (!GitHelper::gitDirectoryExists()) {
