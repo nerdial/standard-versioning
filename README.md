@@ -31,7 +31,7 @@ Options
 Name | Shortcut | Value | Default| Description
 --- | --- | --- | --- | ---
 --start-from | -s | 0.0.1 | 0.1.0 | if you have already a git repository with some tags you should tell the package which version you are in.
---tag-format | -f | v , V  or whatever prefix \n you prefer | v | tag format tells that what prefix should be added to the begining of tag name. by default it uses semvar structure like v1.0.0
+--tag-format | -f | v , V  or whatever prefix you prefer , you could even pass empty string '' without space in between quates to have no prefix in your tag name | v | tag format tells that what prefix should be added to the begining of tag name. by default it uses semvar structure like v1.0.0
 
 ### Create new tag version
 
